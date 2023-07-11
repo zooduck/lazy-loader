@@ -1,0 +1,28 @@
+{
+  "name": "@zooduck/lazy-loader",
+  "version": "0.0.1",
+  "description": "A functional component for lazy loading images",
+  "main": "dist/index.module.js",
+  "type": "module",
+  "repository": {
+    "url": "git+https://github.com/zooduck/lazy-loader.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js",
+    "start": "node build.js && node server.js"
+  },
+  "author": "zooduck",
+  "license": "MIT",
+  "devDependencies": {
+    "@zooduck/build-tools": "^0.0.2",
+    "@zooduck/simple-server": "^0.0.4"
+  },
+  "bugs": {
+    "url": "https://github.com/zooduck/lazy-loader/issues"
+  },
+  "homepage": "https://github.com/zooduck/lazy-loader#readme",
+  "directories": {
+    "doc": "docs"
+  }
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>zooduck/lazy-loader</title>
+    <style>
+      body {
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: 18px;
+      }
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      main h1 a {
+        color: inherit;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      code,
+      pre {
+        background-color: whitesmoke;
+        font-size: smaller;
+      }
+      code {
+        padding: 2px 4px;
+      }
+      pre {
+        padding: 1rem;
+      }
+      .image-row {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+      }
+      .scroll-down-info {
+        font-size: x-large;
+      }
+      .info {
+        background-color: khaki;
+        font-size: large;
+        font-style: italic;
+        padding: 1rem;
+      }
+      .info a {
+        color: inherit;
+      }
+    </style>
+    <script type="module" src="lazyLoader.component.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1>
+        <a href="https://github.com/zooduck/lazy-loader" target="_blank">zooduck/lazy-loader</a>
+      </h1>
+
+      <p>
+        The first two rows of images illustrate default image loading behaviour of the user agent.
+      </p>
+
+      <p class="info">
+        Scroll down to the <a href="#lazy-loader-examples">end of the page</a>
+        to view the &lt;lazy-loader&gt; element in action!
+      </p>
+
+      <section>
+        <h1>&lt;img&gt; (standard)</h1>
+        <section class="image-row">
+          <img src="https://picsum.photos/4999/4000" width="500" height="400" alt="img (standard)" />
+          <img src="https://picsum.photos/3999/3000" width="400" height="300" alt="img (standard)" />
+          <img src="https://picsum.photos/2999/2000" width="300" height="200" alt="img (standard)" />
+        </section>
+      </section>
+
+      <section>
+        <h1>&lt;picture&gt; (standard)</h1>
+        <p>
+          Each <code>&lt;picture&gt;</code> element has two images. If the viewport has an aspect ratio of
+          less than <code>1:1</code> a portrait sized image is used, otherwise a landscape sized image is used.
+        </p>
+        <p>
+          Try resizing the viewport to see the difference.
+        </p>
+        <section class="image-row">
+          <picture>
+            <!-- landscape image -->
+            <source media="(min-aspect-ratio: 1/1)" srcset="https://picsum.photos/4996/4000" width="4996" height="4000">
+            <!-- portrait image -->
+            <source media="(max-aspect-ratio: 1/1)" srcset="https://picsum.photos/4000/4996" width="4000" height="4996">
+            <img src="https://picsum.photos/4996/4000" alt="picture (standard)">
+          </picture>
+
+          <picture>
+            <!-- landscape image -->
+            <source media="(min-aspect-ratio: 1/1)" srcset="https://picsum.photos/3996/3000" width="3996" height="3000">
+            <!-- portrait image -->
+            <source media="(max-aspect-ratio: 1/1)" srcset="https://picsum.photos/3000/3996" width="3000" height="3996">
+            <img src="https://picsum.photos/3996/3000" alt="picture (standard)">
+          </picture>
+
+          <picture>
+            <!-- landscape image -->
+            <source media="(min-aspect-ratio: 1/1)" srcset="https://picsum.photos/2996/2000" width="2996" height="2000">
+            <!-- portrait image -->
+            <source media="(max-aspect-ratio: 1/1)" srcset="https://picsum.photos/2000/2996" width="2000" height="2996">
+            <img src="https://picsum.photos/2996/2000" alt="picture (standard)" width="2997" height="2000">
+          </picture>
+        </section>
+      </section>
+
+      <section id="lazy-loader-examples" style="margin-top: 1000px;">
+        <h1>&lt;img&gt; (using lazy-loader element)</h1>
+
+        <p>
+          By default, images are loaded by the <code>&lt;lazy-loader&gt;</code> element as soon as
+          their placeholders enter the viewport.
+        </p>
+
+        <p>
+          Loading can be further delayed by setting a <code>threshold</code> attribute with a
+          value between <code>0</code> and <code>1</code>:
+        </p>
+<pre>
+&lt;lazy-loader threshold="0.8"&gt;
+</pre>
+        <p>
+           In the following row, the first image has been given a <code>threshold</code> of <code>0.8</code>, so it will not begin
+           loading until at least 80% of it's placeholder is visible in the viewport.
+        </p>
+
+        <section class="image-row">
+          <lazy-loader threshold="0.8">
+            <img src="https://picsum.photos/5000/4000" width="500" height="400" alt="img (lazy)" />
+          </lazy-loader>
+
+          <lazy-loader>
+            <img src="https://picsum.photos/4000/3000" width="400" height="300" alt="img (lazy)" />
+          </lazy-loader>
+
+          <lazy-loader>
+            <img src="https://picsum.photos/3000/2000" width="300" height="200" alt="img (lazy)" />
+          </lazy-loader>
+        </section>
+      </section>
+
+      <section>
+        <h1>&lt;picture&gt; (using lazy-loader element)</h1>
+        <p>
+          Each <code>&lt;picture&gt;</code> element has two images. If the viewport has an aspect ratio of
+          less than <code>1:1</code> a portrait sized image is used, otherwise a landscape sized image is used.
+        </p>
+        <p>
+          Try resizing the viewport to see the difference.
+        </p>
+        <section class="image-row">
+          <lazy-loader>
+            <picture>
+              <!-- landscape image -->
+              <source media="(min-aspect-ratio: 1/1)" srcset="https://picsum.photos/4997/4000" width="4997" height="4000">
+              <!-- portrait image -->
+              <source media="(max-aspect-ratio: 1/1)" srcset="https://picsum.photos/4000/4997" width="4000" height="4997">
+              <img src="https://picsum.photos/4997/4000" alt="picture (lazy)">
+            </picture>
+          </lazy-loader>
+
+          <lazy-loader>
+            <picture>
+              <!-- landscape image -->
+              <source media="(min-aspect-ratio: 1/1)" srcset="https://picsum.photos/3997/3000" width="3997" height="3000">
+              <!-- portrait image -->
+              <source media="(max-aspect-ratio: 1/1)" srcset="https://picsum.photos/3000/3997" width="3000" height="3997">
+              <img src="https://picsum.photos/3997/3000" alt="picture (lazy)">
+            </picture>
+          </lazy-loader>
+
+          <lazy-loader>
+            <picture>
+              <!-- landscape image -->
+              <source media="(min-aspect-ratio: 1/1)" srcset="https://picsum.photos/2997/2000" width="2997" height="2000">
+              <!-- portrait image -->
+              <source media="(max-aspect-ratio: 1/1)" srcset="https://picsum.photos/2000/2997" width="2000" height="2997">
+              <img src="https://picsum.photos/2997/2000" alt="picture (lazy)" width="2997" height="2000">
+            </picture>
+          </lazy-loader>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
