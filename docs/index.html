@@ -17,10 +17,9 @@
       a:not(:visited) {
         color: dodgerblue;
       }
-      header {
+      .header {
         align-items: center;
         background-color: white;
-        box-shadow: rgba(0,0,0,0.25) 0px 4px 12px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -28,6 +27,9 @@
         padding: 1rem;
         position: sticky;
         top: 0;
+      }
+      .header--stuck {
+        box-shadow: rgba(0, 0, 0, 0.25) 0 4px 12px;
       }
       img {
         max-width: 100%;
@@ -65,9 +67,18 @@
       }
     </style>
     <script type="module" src="lazyLoader.component.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        window.onscroll = () => {
+          const headerElement = document.querySelector('.header');
+          const classListMethod = window.pageYOffset > 0 ? 'add' : 'remove';
+          headerElement.classList[classListMethod]('header--stuck');
+        }
+      });
+    </script>
   </head>
   <body>
-    <header>
+    <header class="header">
       <h1>
         zooduck/lazy-loader
       </h1>
