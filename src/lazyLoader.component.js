@@ -1,6 +1,7 @@
 class HTMLLazyLoaderElement extends HTMLElement {
   #hasRendered;
   #hasSlotChangeEventFired;
+  #placeholderAnimation;
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -45,15 +46,32 @@ class HTMLLazyLoaderElement extends HTMLElement {
   /**
    * @method
    * @private
+   * @param {HTMLImageElement} imageElement
+   * @returns {Animation} placeholderAnimation
+   */
+  #animateImagePlaceholder(imageElement) {
+    return imageElement.animate([
+      { filter: 'brightness(1)' },
+      { filter: 'brightness(1.5)' },
+      { filter: 'brightness(1)' }
+    ], {
+      duration: 2000,
+      iterations: Infinity
+    });
+  }
+  /**
+   * @method
+   * @private
    * @returns {IntersectionObserver}
    */
   #createIntersectionObserverForImageElement() {
-    const intersectionObserver = new IntersectionObserver((entries) => {
+    const intersectionObserver = new IntersectionObserver(async (entries) => {
       if (!entries[0].isIntersecting) {
         return;
       }
-      this.#loadImage(entries[0].target);
       intersectionObserver.unobserve(entries[0].target);
+      await this.#loadImage(entries[0].target);
+      this.#placeholderAnimation.cancel();
     }, {
       threshold: this.threshold
     });
@@ -66,12 +84,13 @@ class HTMLLazyLoaderElement extends HTMLElement {
    * @returns {IntersectionObserver}
    */
   #createIntersectionObserverForPictureElement(pictureElement) {
-    const intersectionObserver = new IntersectionObserver((entries) => {
+    const intersectionObserver = new IntersectionObserver(async (entries) => {
       if (!entries[0].isIntersecting) {
         return;
       }
-      this.#loadPicture(pictureElement);
       intersectionObserver.unobserve(entries[0].target);
+      await this.#loadPicture(pictureElement);
+      this.#placeholderAnimation.cancel();
     }, {
       threshold: this.threshold
     });
@@ -117,6 +136,7 @@ class HTMLLazyLoaderElement extends HTMLElement {
     const { src, width, height } = element;
     element.dataset.src = src;
     element.src = this.#createPlaceholderImageURL(width, height);
+    this.#placeholderAnimation = this.#animateImagePlaceholder(element);
     this.#createIntersectionObserverForImageElement().observe(element);
   }
   /**
@@ -133,6 +153,7 @@ class HTMLLazyLoaderElement extends HTMLElement {
       sourceElement.dataset.srcset = sourceElement.srcset;
       sourceElement.srcset = placeholderImageURL;
     });
+    this.#placeholderAnimation = this.#animateImagePlaceholder(imageElement);
     this.#createIntersectionObserverForPictureElement(pictureElement).observe(imageElement);
   }
   /**
@@ -178,6 +199,7 @@ class HTMLLazyLoaderElement extends HTMLElement {
     const slottedElement = event.target.assignedElements()[0];
     const isPictureElement = slottedElement instanceof HTMLPictureElement;
     const isImageElement = slottedElement instanceof HTMLImageElement;
+
     if (isImageElement) {
       this.#handleImageElement(slottedElement);
     } else if (isPictureElement) {

@@ -8,13 +8,26 @@
       body {
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-size: 18px;
+        margin: 8px;
       }
       main {
         max-width: 800px;
         margin: 0 auto;
       }
-      main h1 a {
-        color: inherit;
+      a:not(:visited) {
+        color: dodgerblue;
+      }
+      header {
+        align-items: center;
+        background-color: white;
+        box-shadow: rgba(0,0,0,0.25) 0px 4px 12px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: -8px -8px 0 -8px;
+        padding: 1rem;
+        position: sticky;
+        top: 0;
       }
       img {
         max-width: 100%;
@@ -47,15 +60,20 @@
       .info a {
         color: inherit;
       }
+      #lazy-loader-examples {
+        margin-top: 1000px;
+      }
     </style>
     <script type="module" src="lazyLoader.component.js"></script>
   </head>
   <body>
-    <main>
+    <header>
       <h1>
-        <a href="https://github.com/zooduck/lazy-loader" target="_blank">zooduck/lazy-loader</a>
+        zooduck/lazy-loader
       </h1>
-
+      <a href="https://github.com/zooduck/lazy-loader" target="_blank">View on Github</a>
+    </header>
+    <main>
       <p>
         The first two rows of images illustrate default image loading behaviour of the user agent.
       </p>
@@ -110,7 +128,7 @@
         </section>
       </section>
 
-      <section id="lazy-loader-examples" style="margin-top: 1000px;">
+      <section id="lazy-loader-examples">
         <h1>&lt;img&gt; (using lazy-loader element)</h1>
 
         <p>
