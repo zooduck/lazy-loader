@@ -18,22 +18,33 @@
         color: dodgerblue;
       }
       .header {
-        align-items: center;
         background-color: white;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
         margin: -8px -8px 0 -8px;
-        padding: 1rem;
+        padding: 8px;
         position: sticky;
         top: 0;
+        z-index: 1;
       }
       .header--stuck {
         box-shadow: rgba(0, 0, 0, 0.25) 0 4px 12px;
       }
+      .header__content {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 800px;
+      }
+      .header__content-heading {
+        font-size: 2rem;
+      }
       img {
         max-width: 100%;
         height: auto;
+      }
+      p {
+        text-align: justify;
       }
       code,
       pre {
@@ -79,10 +90,16 @@
   </head>
   <body>
     <header class="header">
-      <h1>
-        zooduck/lazy-loader
-      </h1>
-      <a href="https://github.com/zooduck/lazy-loader" target="_blank">View on Github</a>
+      <section class="header__content">
+        <h1 class="header__content-heading">
+          zooduck/lazy-loader
+        </h1>
+        <a href="https://github.com/zooduck/lazy-loader" target="_blank">View on Github</a>
+        <p>
+          A functional component for lazy loading images. Automatically generates image placeholders
+          and defers loading of images until they are visible in the viewport.
+        </p>
+      </section>
     </header>
     <main>
       <p>
