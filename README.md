@@ -1,4 +1,4 @@
-# lazy-loader
+# zooduck/lazy-loader
 
 A functional component for lazy loading images.
 
@@ -6,54 +6,29 @@ Automatically generates image placeholders and defers loading of images until th
 
 Supports `<img>` and `<picture>` elements.
 
-## Installation
+## Demo
 
-### For users with an access token
-
-Add a `.npmrc` file to your project, with the following lines:
-
-```text
-@zooduck:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_ACCESS_TOKEN
-```
-
-Install from the command line:
-
-```node
-npm install @zooduck/lazy-loader@latest
-```
-
-Install via package.json:
-
-```json
-"@zooduck/lazy-loader": "latest"
-```
-
-### For users without an access token
-
-Clone or [Download](https://github.com/zooduck/lazy-loader/archive/refs/heads/master.zip) the repository to your machine.
+Visit [Github Pages](https://zooduck.github.io/lazy-loader/) to see this component in action.
 
 ## Getting started
 
-Copy the `lazy-loader` folder to your project.
-
-## Import
-
-Import using a module file:
-
-```javascript
-import 'path/to/lazy-loader/dist/index.module.js'
-```
-
-Import using a module script:
+Simply add the following script tag to your document head:
 
 ```html
-<script src="path/to/lazy-loader/dist/index.module.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/gh/zooduck/lazy-loader@master/dist/index.module.js"></script>
 ```
+
+Or import using a module file:
+
+```javascript
+import 'https://cdn.jsdelivr.net/gh/zooduck/lazy-loader@master/dist/index.module.js'
+```
+
+
 
 ## Prerequisites
 
-**Always** include `width` and `height` attributes on your `<img>` element (or each `<source>` element when using `<picture>`).
+*Always* include `width` and `height` attributes on your `<img>` element (or each `<source>` element when using `<picture>`).
 
 Aside from being best practice, this information is critical for creating placeholders with the correct aspect ratio.
 
@@ -99,7 +74,7 @@ For `<picture>` elements, wrap the `<picture>` element and ***not*** the `<img>`
 </lazy-loader>
 ```
 
-**Important!** Don't forget to provide `width` and `height` attributes for *each* `<source>` element!
+**Warning!** Don't forget to provide `width` and `height` attributes for *each* `<source>` element!
 
 ## Setting a threshold
 
@@ -122,3 +97,54 @@ In the following example, loading is deferred until 50% of the image placeholder
 ```
 
 **Warning!** Only use the `threshold` attribute if you have very specific requirements and know what you are doing. If an image exceeds the height of the viewport, setting this attribute can result in the image never loading!
+
+## Self hosting
+
+The easiest way to use this component is via CDN (as explained in the "Getting Started" section near the top of this file).
+
+*Unless you have a specific reason to host the component yourself, you can ignore the following instructions.*
+
+## Installation
+
+### For users with an access token
+
+Add a `.npmrc` file to your project, with the following lines:
+
+```text
+@zooduck:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_ACCESS_TOKEN
+```
+
+Install from the command line:
+
+```node
+npm install @zooduck/lazy-loader@latest
+```
+
+Install via package.json:
+
+```json
+"@zooduck/lazy-loader": "latest"
+```
+
+### For users without an access token
+
+Clone or [Download](https://github.com/zooduck/lazy-loader/archive/refs/heads/master.zip) the repository to your machine.
+
+## Next
+
+Copy the `lazy-loader` folder to your project.
+
+## Import
+
+Import using a module file:
+
+```javascript
+import 'path/to/lazy-loader/dist/index.module.js'
+```
+
+Import using a script:
+
+```html
+<script src="path/to/lazy-loader/dist/index.module.js"></script>
+```
