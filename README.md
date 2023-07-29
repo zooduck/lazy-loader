@@ -24,8 +24,6 @@ Or import using a module file:
 import 'https://cdn.jsdelivr.net/gh/zooduck/lazy-loader@master/dist/index.module.js'
 ```
 
-
-
 ## Prerequisites
 
 *Always* include `width` and `height` attributes on your `<img>` element (or each `<source>` element when using `<picture>`).
