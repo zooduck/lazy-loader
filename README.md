@@ -15,13 +15,13 @@ Visit [Github Pages](https://zooduck.github.io/lazy-loader/) to see this compone
 Simply add the following script tag to your document head:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/zooduck/lazy-loader@master/dist/index.module.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/gh/zooduck/lazy-loader@latest/dist/index.module.js" type="module"></script>
 ```
 
 Or import using a module file:
 
 ```javascript
-import 'https://cdn.jsdelivr.net/gh/zooduck/lazy-loader@master/dist/index.module.js'
+import 'https://cdn.jsdelivr.net/gh/zooduck/lazy-loader@latest/dist/index.module.js'
 ```
 
 ## Prerequisites
